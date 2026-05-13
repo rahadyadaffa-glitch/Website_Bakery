@@ -15,7 +15,10 @@ class WaiterMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // AUTHORIZATION DISABLED FOR TESTING
-        return $next($request);
+        if ($request->user() && in_array($request->user()->role, ['admin', 'waiter'])) {
+            return $next($request);
+        }
+
+        abort(403, 'Unauthorized action.');
     }
 }

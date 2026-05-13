@@ -10,7 +10,10 @@ class AdminMiddleware
 {
     public function handle(Request $request, Closure $next): Response
     {
-        // AUTHORIZATION DISABLED FOR TESTING
-        return $next($request);
+        if ($request->user() && $request->user()->role === 'admin') {
+            return $next($request);
+        }
+
+        abort(403, 'Unauthorized action.');
     }
 }
