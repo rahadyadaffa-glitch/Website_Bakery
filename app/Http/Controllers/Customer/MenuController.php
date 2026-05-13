@@ -10,15 +10,35 @@ use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
-    public function index(CartService $cartService, MenuCategory $category = null)
+    public function index(Request $request, CartService $cartService, MenuCategory $category = null)
     {
+        // Handle QR Code Table Parameter
+        if ($request->has('table')) {
+            $tableNumber = $request->table;
+            session()->put('table_number', $tableNumber);
+
+            // Jika meja berstatus 'available', berarti ini sesi baru (pelanggan baru)
+            // Maka kita reset nama pelanggan di session
+            $table = \App\Models\Table::where('number', $tableNumber)->first();
+            if ($table && $table->status === 'available') {
+                session()->forget('customer_name');
+            }
+        } elseif (session()->has('table_number')) {
+            // Jika di URL tidak ada table tapi di session ada, redirect agar URL tetap konsisten
+            return redirect()->route('menu.index', array_merge(
+                ['category' => $category ? $category->id : null],
+                $request->query(),
+                ['table' => session('table_number')]
+            ));
+        }
+
         $categories = MenuCategory::where('is_active', true)->orderBy('order')->get();
         
         // If no category selected, redirect to the first one available
         if (!$category || !$category->exists) {
             $firstCategory = $categories->first();
             if ($firstCategory) {
-                return redirect()->route('menu.index', $firstCategory->id);
+                return redirect()->route('menu.index', array_merge(['category' => $firstCategory->id], $request->query()));
             }
         }
 

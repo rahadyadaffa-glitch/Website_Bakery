@@ -1,4 +1,4 @@
-# 🧁 SweetBite — Sistem Pemesanan Bakery Digital
+# 🧁 SweetBite — Sistem Pemesanan Bakery Digital (Artisanal Edition)
 
 <p align="center">
   <img src="https://img.shields.io/badge/Laravel-12-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel">
@@ -11,26 +11,30 @@
 
 ## 📖 Tentang Project
 
-**SweetBite** adalah aplikasi web pemesanan makanan dan minuman untuk toko bakery/dessert cafe. Dibangun dengan target pengguna **Gen Z**, mengutamakan pengalaman yang fun, colorful, dan playful.
+**SweetBite** adalah aplikasi web pemesanan makanan dan minuman premium yang dirancang khusus untuk toko bakery, dessert shop, atau artisanal cafe. Dengan estetika yang hangat, organik, dan berkelas, SweetBite membawa pengalaman memesan kue dan roti ke level yang lebih modern dan efisien.
 
-Pelanggan bisa langsung scan QR di meja, pilih menu, checkout, dan bayar — semua dari HP tanpa perlu antri.
+Aplikasi ini memudahkan pelanggan untuk melakukan pemesanan secara mandiri (self-service) melalui QR Code, serta membantu operasional staf (waiter) dan admin dalam mengelola pesanan secara real-time.
 
 ---
 
 ## ✨ Fitur Utama
 
-### 🛒 Customer Side
-- **Menu Digital** — Tampilan menu interaktif dengan kategori, badge (Best Seller, New), dan gambar
-- **Keranjang Belanja** — Slide panel cart dengan tambah/kurang quantity dan catatan per item
-- **Checkout & Pembayaran** — Form checkout dengan nomor meja, nama, dan catatan tambahan
-- **QR Code Meja** — Scan QR langsung masuk ke halaman menu
+### 🛒 Customer Experience
+- **Menu Digital Artisanal** — Katalog menu cantik dengan kategori, label khusus (Best Seller, New), dan visual produk yang menggugah selera.
+- **Smart Shopping Cart** — Panel keranjang belanja yang intuitif dengan fitur tambah/kurang kuantitas dan catatan khusus per item.
+- **Checkout Tanpa Repot** — Proses checkout cepat dengan input nomor meja dan nama pelanggan.
+- **Seamless QR Scan** — Langsung masuk ke meja yang tepat hanya dengan memindai kode QR.
+
+### 🤵 Waiter & Staff Tools
+- **Manajemen Meja (Table Management)** — Monitor status meja secara real-time untuk memudahkan pelayanan.
+- **Sistem Struk Digital (Waiter Receipts)** — Cetak struk pesanan yang ringkas dan efisien hanya untuk item yang siap diantarkan.
+- **Workflow Terintegrasi** — Perubahan status pesanan (Accepted -> Ready -> Delivered) yang tersinkronisasi.
 
 ### 🔧 Admin Dashboard
-- **Antrean Dapur** — Real-time polling pesanan masuk (auto-refresh 5 detik)
-- **Kelola Menu** — CRUD menu lengkap dengan upload foto, badge, dan toggle status (Tersedia/Habis)
-- **Riwayat Pesanan** — History pesanan selesai dengan filter tanggal (Hari Ini, Kemarin, atau pilih tanggal)
-- **Kategori Menu** — Kelola kategori menu (Kue, Minuman, Dessert, Paket, dll)
-- **QR Code Generator** — Generate QR code untuk setiap nomor meja
+- **Antrean Dapur Real-time** — Monitor pesanan masuk dengan fitur auto-refresh (polling) untuk respons yang cepat.
+- **Manajemen Menu Lengkap** — CRUD menu, kategori, status ketersediaan, dan manajemen foto produk.
+- **Analitik & Riwayat** — Laporan pesanan dengan filter tanggal yang fleksibel untuk memantau performa penjualan.
+- **QR Code Generator** — Generate QR Code unik untuk setiap meja langsung dari dashboard.
 
 ---
 
@@ -43,7 +47,18 @@ Pelanggan bisa langsung scan QR di meja, pilih menu, checkout, dan bayar — sem
 | **Database** | MySQL 8 |
 | **Auth** | Laravel Breeze |
 | **Build Tool** | Vite |
-| **Font** | Fredoka (Heading) + Plus Jakarta Sans (Body) |
+| **Typography** | Fredoka (Heading), Plus Jakarta Sans (Body), Gochi Hand (Accents) |
+
+---
+
+## 🎨 Design System (Artisanal Aesthetic)
+
+SweetBite menggunakan palet warna yang terinspirasi dari bahan-bahan organik dan kehangatan toko roti tradisional namun tetap modern:
+
+- **Primary**: Cokelat Artisanal `#8E4E14` (Representasi roti yang dipanggang sempurna)
+- **Secondary**: Hijau Hutan `#366758` (Memberikan kesan segar dan alami)
+- **Background**: Putih Krem `#FFF8EF` (Memberikan kenyamanan visual)
+- **Style**: Rounded corners yang besar (`1rem`–`4rem`) untuk kesan yang ramah dan *bubbly*.
 
 ---
 
@@ -59,8 +74,8 @@ Pelanggan bisa langsung scan QR di meja, pilih menu, checkout, dan bayar — sem
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/rahadyadaffa-glitch/Websit_Bakery.git
-cd Websit_Bakery
+git clone https://github.com/rahadyadaffa-glitch/Website_Bakery.git
+cd Website_Bakery
 
 # 2. Install dependencies
 composer install
@@ -112,22 +127,12 @@ docs/                   # Dokumentasi project (PRD, Architecture, UI Guide, dll)
 
 ---
 
-## 🎨 Design System
-
-- **Warna Utama**: Biru `#427AB5` + Kuning `#F7DD7D`
-- **Background**: Putih hangat `#FFFDF7`
-- **Mood**: Fun, colorful, playful — seperti dessert cafe kekinian
-- **Border Radius**: Rounded besar (16px–32px)
-- **Shadow**: Bubbly shadow style
-
----
-
 ## 👥 Kontributor
 
-- **Rahadya Daffa** — Developer
+- **Rahadya Daffa** — Lead Developer & Designer
 
 ---
 
 ## 📄 Lisensi
 
-Project ini dibuat untuk keperluan akademik / portfolio.
+Project ini dibuat untuk keperluan akademik / portfolio. Silakan digunakan sebagai referensi belajar!

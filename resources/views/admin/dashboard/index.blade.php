@@ -1,108 +1,110 @@
 @extends('layouts.admin')
-@section('title', 'Admin Overview')
+@section('title', 'Studio Overview')
 
 @section('content')
     <div class="relative">
-        <!-- Welcome Section -->
-        <div class="bg-gradient-to-r from-primary to-primary-dark rounded-[2.5rem] p-10 mb-10 shadow-2xl relative overflow-hidden">
+        <!-- Artisanal Welcome Section -->
+        <div class="bg-[#8e4e14] wobbly-border-extreme p-10 mb-12 shadow-[10px_10px_0_rgba(142,78,20,0.2)] relative overflow-hidden transform -rotate-1">
             <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-            <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
                 <div>
-                    <h2 class="font-heading font-black text-3xl text-white mb-2">Semangat Jualan, {{ explode(' ', auth()->user()->name)[0] }}! 👋</h2>
-                    <p class="text-primary-light font-medium opacity-90">Hari ini ada {{ $ordersCount }} pesanan masuk. Yuk, cek antrean sekarang!</p>
+                    <h2 class="hand-drawn font-black text-5xl text-white mb-3">Semangat Jualan, {{ explode(' ', auth()->user()->name)[0] }}! 🧁</h2>
+                    <p class="hand-drawn text-3xl text-white opacity-80 leading-tight">Hari ini ada <span class="underline decoration-wavy">{{ $ordersCount }} pesanan</span> masuk. Yuk, cek antrean monitor sekarang!</p>
                 </div>
-                <a href="{{ route('admin.orders.index') }}" class="bg-accent text-primary font-black py-4 px-8 rounded-2xl hover:bg-accent-dark hover:scale-105 transition-all shadow-xl flex items-center gap-2 group">
+                <a href="{{ route('admin.orders.index') }}" class="bg-white text-[#8e4e14] font-heading font-black py-5 px-10 wobbly-border-thin hover:scale-105 transition-all shadow-[5px_5px_0_#000] flex items-center gap-3 group hand-drawn text-3xl transform rotate-2">
                     Cek Antrean Dapur
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                    </svg>
+                    <span class="material-symbols-outlined group-hover:translate-x-2 transition-transform text-3xl">restaurant</span>
                 </a>
             </div>
         </div>
 
         <!-- Stats Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
             <!-- Stat Card -->
-            <div class="bg-white p-6 rounded-3xl border border-border shadow-sm hover:shadow-xl transition-all group">
-                <div class="flex justify-between items-start mb-4">
-                    <div class="w-12 h-12 rounded-2xl bg-primary-light/50 flex items-center justify-center text-2xl group-hover:bg-primary group-hover:text-white transition-colors duration-500">
+            <div class="bg-white p-8 wobbly-border shadow-[4px_4px_0_rgba(142,78,20,0.1)] group hover:-rotate-1 transition-all">
+                <div class="flex justify-between items-start mb-6">
+                    <div class="w-14 h-14 wobbly-border-thin bg-[#f5edde] flex items-center justify-center text-3xl transform -rotate-3 group-hover:bg-[#8e4e14] group-hover:text-white transition-all duration-300">
                         🧾
                     </div>
                 </div>
-                <p class="text-text-secondary text-sm font-bold uppercase tracking-widest mb-1 opacity-60">Total Pesanan</p>
-                <h3 class="font-heading font-black text-3xl text-text-primary">{{ $ordersCount }}</h3>
+                <p class="hand-drawn text-2xl text-[#534439] opacity-60 mb-1">Total Pesanan</p>
+                <h3 class="font-heading font-black text-4xl text-[#8e4e14]">{{ $ordersCount }}</h3>
             </div>
 
             <!-- Stat Card -->
-            <div class="bg-white p-6 rounded-3xl border border-border shadow-sm hover:shadow-xl transition-all group">
-                <div class="flex justify-between items-start mb-4">
-                    <div class="w-12 h-12 rounded-2xl bg-accent-light/50 flex items-center justify-center text-2xl group-hover:bg-accent group-hover:text-primary transition-colors duration-500">
+            <div class="bg-white p-8 wobbly-border shadow-[4px_4px_0_rgba(142,78,20,0.1)] group hover:rotate-1 transition-all">
+                <div class="flex justify-between items-start mb-6">
+                    <div class="w-14 h-14 wobbly-border-thin bg-[#f5edde] flex items-center justify-center text-3xl transform rotate-3 group-hover:bg-[#f4a261] group-hover:text-white transition-all duration-300">
                         💰
                     </div>
                 </div>
-                <p class="text-text-secondary text-sm font-bold uppercase tracking-widest mb-1 opacity-60">Pendapatan</p>
-                <h3 class="font-heading font-black text-2xl text-text-primary leading-none">Rp{{ number_format($revenue, 0, ',', '.') }}</h3>
+                <p class="hand-drawn text-2xl text-[#534439] opacity-60 mb-1">Pendapatan</p>
+                <h3 class="font-heading font-black text-3xl text-[#8e4e14] leading-none">Rp {{ number_format($revenue, 0, ',', '.') }}</h3>
             </div>
 
             <!-- Stat Card -->
-            <div class="bg-white p-6 rounded-3xl border border-border shadow-sm hover:shadow-xl transition-all group">
-                <div class="flex justify-between items-start mb-4">
-                    <div class="w-12 h-12 rounded-2xl bg-danger-light/50 flex items-center justify-center text-2xl group-hover:bg-danger group-hover:text-white transition-colors duration-500">
+            <div class="bg-white p-8 wobbly-border shadow-[4px_4px_0_rgba(142,78,20,0.1)] group hover:-rotate-1 transition-all">
+                <div class="flex justify-between items-start mb-6">
+                    <div class="w-14 h-14 wobbly-border-thin bg-[#f5edde] flex items-center justify-center text-3xl transform -rotate-6 group-hover:bg-[#366758] group-hover:text-white transition-all duration-300">
                         🍰
                     </div>
-                    <span class="text-text-muted text-xs font-black">Terlaris</span>
+                    <span class="hand-drawn text-xl text-[#f4a261] font-black italic transform rotate-6">Terlaris!</span>
                 </div>
-                <p class="text-text-secondary text-sm font-bold uppercase tracking-widest mb-1 opacity-60">Top Menu</p>
-                <h3 class="font-heading font-black text-xl text-text-primary truncate">
+                <p class="hand-drawn text-2xl text-[#534439] opacity-60 mb-1">Top Menu</p>
+                <h3 class="font-heading font-black text-2xl text-[#8e4e14] truncate">
                     {{ $topMenu ? $topMenu->menu_name : 'Belum ada data' }}
                 </h3>
             </div>
 
             <!-- Stat Card -->
-            <div class="bg-white p-6 rounded-3xl border border-border shadow-sm hover:shadow-xl transition-all group">
-                <div class="flex justify-between items-start mb-4">
-                    <div class="w-12 h-12 rounded-2xl bg-green-100 flex items-center justify-center text-2xl group-hover:bg-green-500 group-hover:text-white transition-colors duration-500">
+            <div class="bg-white p-8 wobbly-border shadow-[4px_4px_0_rgba(142,78,20,0.1)] group hover:rotate-2 transition-all">
+                <div class="flex justify-between items-start mb-6">
+                    <div class="w-14 h-14 wobbly-border-thin bg-[#f5edde] flex items-center justify-center text-3xl transform rotate-2 group-hover:bg-[#8e4e14] group-hover:text-white transition-all duration-300">
                         🪑
                     </div>
                 </div>
-                <p class="text-text-secondary text-sm font-bold uppercase tracking-widest mb-1 opacity-60">Meja Aktif</p>
-                <h3 class="font-heading font-black text-3xl text-text-primary">{{ $activeTablesCount }}</h3>
+                <p class="hand-drawn text-2xl text-[#534439] opacity-60 mb-1">Meja Aktif</p>
+                <h3 class="font-heading font-black text-4xl text-[#8e4e14]">{{ $activeTablesCount }}</h3>
             </div>
         </div>
 
         <!-- Quick Links Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div class="lg:col-span-2 space-y-6">
-                <div class="flex items-center justify-between">
-                    <h3 class="font-heading font-black text-2xl text-text-primary">Aksi Cepat ⚡</h3>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+            <div class="lg:col-span-2 space-y-8">
+                <div class="flex items-center gap-4">
+                    <span class="material-symbols-outlined text-[#8e4e14] text-4xl">bolt</span>
+                    <h3 class="hand-drawn font-black text-4xl text-[#1e1b13]">Aksi Cepat Artisanal</h3>
                 </div>
-                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                    <a href="{{ route('admin.menus.create') }}" class="p-6 bg-white rounded-3xl border border-border hover:border-primary hover:shadow-xl transition-all text-center group">
-                        <div class="text-3xl mb-3 group-hover:scale-110 transition-transform">➕</div>
-                        <p class="font-bold text-sm text-text-primary">Menu Baru</p>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-6">
+                    <a href="{{ route('admin.menus.create') }}" class="p-8 bg-white wobbly-border-thin hover:border-[#8e4e14] hover:shadow-xl transition-all text-center group transform hover:-rotate-2">
+                        <div class="text-4xl mb-4 group-hover:scale-125 transition-transform">➕</div>
+                        <p class="hand-drawn text-2xl font-black text-[#1e1b13]">Menu Baru</p>
                     </a>
-                    <a href="{{ route('admin.categories.index') }}" class="p-6 bg-white rounded-3xl border border-border hover:border-primary hover:shadow-xl transition-all text-center group">
-                        <div class="text-3xl mb-3 group-hover:scale-110 transition-transform">📁</div>
-                        <p class="font-bold text-sm text-text-primary">Kategori</p>
+                    <a href="{{ route('admin.categories.index') }}" class="p-8 bg-white wobbly-border-thin hover:border-[#8e4e14] hover:shadow-xl transition-all text-center group transform hover:rotate-2">
+                        <div class="text-4xl mb-4 group-hover:scale-125 transition-transform">📁</div>
+                        <p class="hand-drawn text-2xl font-black text-[#1e1b13]">Kategori</p>
                     </a>
-                    <a href="{{ route('admin.tables.index') }}" class="p-6 bg-white rounded-3xl border border-border hover:border-primary hover:shadow-xl transition-all text-center group">
-                        <div class="text-3xl mb-3 group-hover:scale-110 transition-transform">🖨️</div>
-                        <p class="font-bold text-sm text-text-primary">Cetak QR</p>
+                    <a href="{{ route('admin.tables.index') }}" class="p-8 bg-white wobbly-border-thin hover:border-[#8e4e14] hover:shadow-xl transition-all text-center group transform hover:-rotate-1">
+                        <div class="text-4xl mb-4 group-hover:scale-125 transition-transform">🖨️</div>
+                        <p class="hand-drawn text-2xl font-black text-[#1e1b13]">Cetak QR</p>
                     </a>
                 </div>
             </div>
 
-            <div class="space-y-6">
-                <h3 class="font-heading font-black text-2xl text-text-primary">Info Resto 🏠</h3>
-                <div class="bg-white rounded-[2.5rem] p-8 border border-border shadow-sm">
-                    <div class="space-y-4">
-                        <div class="flex items-center justify-between p-3 bg-bg-secondary rounded-2xl">
-                            <span class="text-sm font-bold text-text-secondary">Status Resto</span>
-                            <span class="px-3 py-1 bg-green-500 text-white text-[10px] font-black rounded-full uppercase tracking-widest shadow-sm">Open</span>
+            <div class="space-y-8">
+                <div class="flex items-center gap-4">
+                    <span class="material-symbols-outlined text-[#8e4e14] text-4xl">storefront</span>
+                    <h3 class="hand-drawn font-black text-4xl text-[#1e1b13]">Info Resto 🏠</h3>
+                </div>
+                <div class="bg-white wobbly-border-extreme p-8 shadow-[6px_6px_0_rgba(142,78,20,0.1)] transform rotate-1">
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between p-4 bg-[#f5edde] wobbly-border-thin transform -rotate-1">
+                            <span class="hand-drawn text-2xl text-[#534439]">Status Studio</span>
+                            <span class="px-4 py-1 bg-[#366758] text-white hand-drawn text-xl font-black wobbly-border-thin shadow-sm">OPEN ✨</span>
                         </div>
-                        <div class="flex items-center justify-between p-3 bg-bg-secondary rounded-2xl">
-                            <span class="text-sm font-bold text-text-secondary">Admin Aktif</span>
-                            <span class="font-heading font-bold text-primary">{{ auth()->user()->name }}</span>
+                        <div class="flex items-center justify-between p-4 bg-[#f5edde] wobbly-border-thin transform rotate-1">
+                            <span class="hand-drawn text-2xl text-[#534439]">Admin Aktif</span>
+                            <span class="hand-drawn text-2xl font-black text-[#8e4e14]">{{ auth()->user()->name }}</span>
                         </div>
                     </div>
                 </div>

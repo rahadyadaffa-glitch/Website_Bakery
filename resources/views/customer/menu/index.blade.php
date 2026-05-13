@@ -1,73 +1,78 @@
 @extends('layouts.customer')
 
 @section('content')
-    <div x-data="menuPage()" x-init="init()" class="min-h-screen">
+    <div x-data="menuPage()" x-init="init()" class="min-h-screen w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
         
-        <!-- Categories Navigation (Bubbly Tabs) -->
-        <section class="mx-6 mb-12 overflow-x-auto no-scrollbar py-6 sticky top-16 z-30">
-            <div class="flex items-center justify-center gap-4">
-                @foreach($categories as $cat)
-                    <a href="{{ route('menu.index', $cat->id) }}" 
-                       class="px-8 py-3 rounded-full font-heading font-black text-sm tracking-wide transition-all border-4 {{ (isset($category) && $category->id == $cat->id) ? 'bg-accent border-primary text-primary shadow-[4px_4px_0px_0px_#427AB5]' : 'bg-white border-border text-text-secondary hover:border-accent' }}">
-                        {{ $cat->name }}
-                    </a>
-                @endforeach
+        <!-- Hero Title Section -->
+        <section class="mb-20 text-center relative mt-10">
+            <div class="inline-flex items-center gap-2 bg-[#f4a261] wobbly-border-extreme px-6 py-3 mb-8 transform -rotate-3 shadow-[4px_4px_0_#8e4e14]">
+                <span class="material-symbols-outlined text-white text-[28px]" style="font-variation-settings: 'FILL' 1;">stars</span>
+                <span class="font-heading font-black text-white text-2xl tracking-wide uppercase">Menu Paling Rebutan! 🔥</span>
+                <span class="material-symbols-outlined text-white text-[28px]" style="font-variation-settings: 'FILL' 1;">stars</span>
             </div>
-        </section>
 
-        <!-- Clean Page Header -->
-        <section class="mx-6 mb-12 text-center">
-            <h1 class="font-heading text-6xl text-primary font-black tracking-tight mb-4 uppercase">
-                {{ $category->name }}
-            </h1>
-            <div class="hand-drawn text-2xl text-secondary -rotate-2 mb-8">
-                Pilih menu favoritmu di bawah ini! 👇
+            <div class="relative inline-block">
+                <h1 class="hand-drawn text-[64px] leading-tight text-[#8e4e14] mb-6 wobbly-border inline-block p-8 bg-white relative shadow-[6px_6px_0_#8e4e14] transform rotate-1">
+                    {{ isset($category) ? $category->name : 'Pilih Jajananmu!' }}
+                    <span class="material-symbols-outlined absolute -bottom-8 -right-8 text-[60px] text-[#366758] transform rotate-12">edit</span>
+                    <span class="material-symbols-outlined absolute -top-8 -left-8 text-[50px] text-[#725477] transform -rotate-12">auto_awesome</span>
+                </h1>
             </div>
             
-            <!-- Star Legend (Gen Z style) -->
-            <div class="flex items-center justify-center gap-3 text-sm font-black text-white bg-primary px-8 py-3 rounded-2xl border-4 border-white shadow-[8px_8px_0px_0px_#F7DD7D] w-max mx-auto -rotate-1">
-                <span class="material-symbols-outlined text-2xl text-accent" style="font-variation-settings: 'FILL' 1, 'wght' 700;">stars</span>
-                <span class="uppercase tracking-tight">Menu Paling Rebutan! 🔥</span>
-            </div>
+            @if(isset($category))
+                <p class="hand-drawn text-[28px] text-[#534439] max-w-2xl mx-auto mt-6 wobbly-border-thin bg-white px-6 py-3 transform -rotate-1 inline-block">
+                    Kategori: <span class="font-bold underline">{{ $category->name }}</span> ✨
+                </p>
+            @endif
         </section>
 
-        <!-- Menu Grid (Playful Cards) -->
-        <section class="mx-6 pb-32">
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-10">
+        <!-- Artisanal Category Filters -->
+        <section class="flex flex-wrap justify-center gap-4 mb-20 px-2">
+            @foreach($categories as $cat)
+                <a href="{{ route('menu.index', array_merge(['category' => $cat->id, 'table' => session('table_number')], request()->query())) }}" 
+                   class="{{ (isset($category) && $category->id == $cat->id) ? 'bg-[#f4a261] text-white wobbly-border-extreme' : 'bg-white text-[#534439] wobbly-border' }} px-8 py-3 hand-drawn text-2xl sketch-button transform {{ $loop->index % 2 == 0 ? '-rotate-2' : 'rotate-2' }} inline-block hover:text-[#366758] transition-all">
+                    {{ $cat->name }}
+                </a>
+            @endforeach
+        </section>
+
+        <!-- Product Grid -->
+        <section class="relative pb-32">
+            <!-- Decorative line behind grid -->
+            <div class="absolute top-1/2 left-0 w-full border-t-4 border-dashed border-[#8e4e14] opacity-10 -z-10"></div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
                 @forelse($menus as $menu)
-                    <div class="flex flex-col group bg-white p-6 rounded-[2.5rem] border-4 border-border hover:border-primary transition-all duration-300 bubbly-shadow-hover cursor-pointer"
-                         @click="openItemModal({{ json_encode($menu) }})">
-                        <div class="relative aspect-[4/5] overflow-hidden rounded-[2rem] mb-6 bg-primary-light/30 border-2 border-border group-hover:border-primary/20 transition-colors">
+                    <article class="bg-white wobbly-border-extreme p-6 relative group hover:-translate-y-3 transition-all duration-300 transform {{ $loop->index % 2 == 0 ? '-rotate-2 hover:rotate-0' : 'rotate-2 hover:rotate-0' }} cursor-pointer"
+                             @click="openItemModal({{ json_encode($menu) }})">
+                        
+                        @if($menu->badge === 'best_seller')
+                            <span class="material-symbols-outlined absolute -top-4 -left-4 text-white z-10 bg-[#f4a261] rounded-full p-2 wobbly-border text-[32px] shadow-[2px_2px_0_#8e4e14]" style="font-variation-settings: 'FILL' 1;">stars</span>
+                        @endif
+
+                        <div class="aspect-[4/3] w-full overflow-hidden wobbly-border mb-6 bg-[#f5edde] relative">
                             <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
                                  src="{{ $menu->image ? Storage::url($menu->image) : 'https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&q=80&w=1000' }}">
-                            
-                            <!-- Best Seller Badge (High Contrast) -->
-                            @if($menu->badge === 'best_seller')
-                                <div class="absolute top-4 left-4 bg-primary border-4 border-white w-12 h-12 rounded-2xl flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] z-20">
-                                    <span class="material-symbols-outlined text-3xl text-accent" style="font-variation-settings: 'FILL' 1;">stars</span>
-                                </div>
-                            @endif
+                            <div class="absolute inset-0 bg-[#8e4e14] opacity-0 group-hover:opacity-10 transition-opacity"></div>
+                        </div>
 
-                            <!-- Always Visible Add Button (Bubbly Style) -->
-                            <button @click="openItemModal({{ json_encode($menu) }})" 
-                                    class="absolute bottom-3 right-3 bg-white border-4 border-primary text-primary w-14 h-14 rounded-2xl flex items-center justify-center shadow-[4px_4px_0px_0px_#427AB5] hover:bg-accent hover:scale-110 active:scale-90 transition-all z-20">
-                                <span class="material-symbols-outlined text-3xl font-black">add</span>
+                        <div class="flex justify-between items-end">
+                            <div class="bg-white wobbly-border-thin px-5 py-3 transform {{ $loop->index % 2 == 0 ? 'rotate-1' : '-rotate-1' }} flex-1 mr-4">
+                                <h3 class="hand-drawn text-3xl text-[#1e1b13] mb-1 leading-tight">{{ $menu->name }}</h3>
+                                <p class="font-heading font-black text-2xl text-[#8e4e14]">Rp {{ number_format($menu->price, 0, ',', '.') }}</p>
+                            </div>
+                            
+                            <button @click.stop="openItemModal({{ json_encode($menu) }})" 
+                                    class="w-16 h-16 bg-[#b6ebd8] text-[#1c4f41] wobbly-border flex items-center justify-center sketch-button hover:bg-[#366758] hover:text-white transition-colors shadow-[3px_3px_0_#8e4e14] transform {{ $loop->index % 2 == 0 ? '-rotate-3' : 'rotate-3' }} shrink-0">
+                                <span class="material-symbols-outlined text-[36px] font-black">add</span>
                             </button>
                         </div>
-                        
-                        <div class="px-2">
-                            <h3 class="font-heading font-black text-2xl text-primary leading-tight mb-2 group-hover:text-accent-dark transition-colors" x-text="'{{ $menu->name }}'"></h3>
-                            <div class="flex items-center justify-between mt-auto">
-                                <span class="font-black text-xl text-primary bg-accent/20 px-3 py-1 rounded-xl">
-                                    Rp {{ number_format($menu->price, 0, ',', '.') }}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
+                    </article>
                 @empty
                     <div class="col-span-full py-20 text-center">
-                        <span class="material-symbols-outlined text-9xl text-border mb-4">sentiment_dissatisfied</span>
-                        <h4 class="font-heading font-black text-3xl text-text-secondary opacity-50">Menu belum tersedia...</h4>
+                        <div class="hand-drawn text-4xl text-[#8e4e14]/40 rotate-2">
+                            Yah, jajanan di sini lagi habis... 🥺
+                        </div>
                     </div>
                 @endforelse
             </div>
@@ -94,7 +99,6 @@
                 // Initialize component
             },
             openItemModal(menu) {
-                // Correctly initialize selectedItem with values to prevent NaN
                 this.selectedItem = {
                     ...menu,
                     qty: 1,
@@ -135,22 +139,6 @@
                         
                         this.closeItemModal();
                     }
-                });
-            },
-            clearCart() {
-                fetch('{{ route('cart.clear') }}', {
-                    method: 'DELETE',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                        'X-Requested-With': 'XMLHttpRequest'
-                    }
-                })
-                .then(res => res.json())
-                .then(data => {
-                    const global = Alpine.$data(document.body);
-                    global.cartCount = 0;
-                    global.cartTotal = 0;
-                    global.cartItems = {};
                 });
             }
         }

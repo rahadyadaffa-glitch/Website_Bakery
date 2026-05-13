@@ -1,3 +1,51 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    body {
+        @apply bg-[#fff8ef] text-[#1e1b13];
+        background-image: 
+            url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E"),
+            radial-gradient(#e9e2d3 2px, transparent 2px);
+        background-size: 200px 200px, 30px 30px;
+    }
+}
+
+@layer components {
+    .wobbly-border {
+        border: 3px solid #8e4e14;
+        border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+        box-shadow: 4px 4px 0px rgba(142, 78, 20, 0.2);
+    }
+    
+    .wobbly-border-thin {
+        border: 2px solid #8e4e14;
+        border-radius: 20px 255px 15px 225px/255px 15px 225px 15px;
+        box-shadow: 2px 3px 0px rgba(142, 78, 20, 0.15);
+    }
+
+    .wobbly-border-extreme {
+        border: 3px solid #8e4e14;
+        border-radius: 255px 20px 225px 25px/25px 225px 20px 255px;
+        box-shadow: -3px 4px 0px #8e4e14;
+    }
+
+    .sketch-button {
+        @apply transition-all duration-200;
+    }
+    .sketch-button:hover {
+        @apply scale-[1.08] rotate-[3deg];
+        box-shadow: 6px 6px 0px rgba(142, 78, 20, 0.3);
+    }
+
+    .watercolor-blob {
+        @apply absolute rounded-full blur-[25px] mix-blend-multiply pointer-events-none -z-10;
+        background: radial-gradient(circle, rgba(244, 162, 97, 0.25) 0%, rgba(255, 255, 255, 0) 70%);
+    }
+
+    .doodle-accent {
+        @apply absolute text-[#8e4e14] opacity-60 pointer-events-none -z-10;
+        font-family: 'Material Symbols Outlined';
+    }
+}

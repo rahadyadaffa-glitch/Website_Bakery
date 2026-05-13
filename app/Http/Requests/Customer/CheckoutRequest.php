@@ -15,7 +15,7 @@ class CheckoutRequest extends FormRequest
     {
         return [
             'table_number' => 'required|string|max:10',
-            'customer_name' => 'nullable|string|max:50',
+            'customer_name' => 'required|string|max:50',
             'notes' => 'nullable|string|max:255',
         ];
     }
@@ -24,6 +24,7 @@ class CheckoutRequest extends FormRequest
     {
         return [
             'table_number.required' => 'Nomor meja wajib diisi.',
+            'customer_name.required' => 'Nama wajib diisi biar pelayan tidak tertukar.',
         ];
     }
 }

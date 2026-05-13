@@ -32,8 +32,12 @@ class OrderController extends Controller
     public function store(CheckoutRequest $request)
     {
         try {
-            $order = $this->orderService->createOrder($request->validated());
+            $validated = $request->validated();
+            $order = $this->orderService->createOrder($validated);
+            
+            session()->put('customer_name', $validated['customer_name']);
             session()->put('last_order_id', $order->id);
+            
             return redirect()->route('payment.show', $order->id);
         } catch (\Exception $e) {
             return back()->with('error', $e->getMessage());

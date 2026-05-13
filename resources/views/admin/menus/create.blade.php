@@ -31,8 +31,19 @@
 
             <div class="space-y-1">
                 <label class="block font-bold text-text-primary text-sm">Harga (Rp) <span class="text-danger">*</span></label>
-                <input type="number" name="price" required class="w-full px-4 py-3 rounded-2xl border-2 border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition font-heading font-bold text-lg text-primary">
+                <input type="text" name="price" id="price_input" required 
+                       class="w-full px-4 py-3 rounded-2xl border-2 border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition font-heading font-bold text-lg text-primary"
+                       oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, '.')">
             </div>
+
+            @push('scripts')
+            <script>
+                document.querySelector('form').addEventListener('submit', function(e) {
+                    const priceInput = document.getElementById('price_input');
+                    priceInput.value = priceInput.value.replace(/\./g, '');
+                });
+            </script>
+            @endpush
 
             <div class="space-y-1 md:col-span-2">
                 <label class="block font-bold text-text-primary text-sm">Deskripsi</label>

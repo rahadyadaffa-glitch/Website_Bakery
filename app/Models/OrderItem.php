@@ -12,8 +12,14 @@ class OrderItem extends Model
     use HasFactory, HasUuids;
 
     protected $fillable = [
-        'order_id', 'menu_id', 'menu_name',
-        'price', 'quantity', 'subtotal', 'notes'
+        'order_id',
+        'menu_id',
+        'menu_name',
+        'price',
+        'quantity',
+        'subtotal',
+        'notes',
+        'status',
     ];
 
     public function order(): BelongsTo

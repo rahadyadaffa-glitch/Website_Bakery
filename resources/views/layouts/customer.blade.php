@@ -9,9 +9,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fredoka:wght@300;400;500;600;700&family=Gochi+Hand&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 
     <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -28,93 +26,30 @@
         }
 
         body {
-            background-color: #FFFDF7;
-            overflow-x: hidden;
             font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .hand-drawn {
+            font-family: 'Caveat', cursive;
         }
 
         body.modal-open {
             overflow: hidden;
         }
 
-        /* ═══ Candy Pop Background ═══ */
+        /* ═══ Background Textures ═══ */
         .page-bg {
             position: fixed;
             inset: 0;
             z-index: -1;
-            background: #FFFDF7;
             overflow: hidden;
-        }
-
-        /* Bold candy circles — blue */
-        .candy-circle {
-            position: absolute;
-            border-radius: 50%;
             pointer-events: none;
-        }
-
-        /* Rounded candy squares — yellow */
-        .candy-square {
-            position: absolute;
-            border-radius: 2.5rem;
-            pointer-events: none;
-        }
-
-        /* Wavy bottom */
-        .candy-wave {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 200%;
-            pointer-events: none;
-            animation: wave-slide 25s linear infinite;
         }
 
         @keyframes wave-slide {
             0%   { transform: translateX(0); }
             100% { transform: translateX(-50%); }
-        }
-
-        /* Gentle bounce for shapes */
-        @keyframes candy-bounce {
-            0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
-            50%      { transform: translateY(-18px) rotate(var(--rot, 0deg)); }
-        }
-
-        .main-unit {
-            position: relative;
-            z-index: 10;
-        }
-
-        .bubbly-shadow {
-            box-shadow: 8px 8px 0px 0px rgba(66, 122, 181, 0.2);
-        }
-
-        .bubbly-shadow-hover:hover {
-            box-shadow: 12px 12px 0px 0px rgba(66, 122, 181, 0.3);
-            transform: translate(-4px, -4px);
-        }
-
-        .hand-drawn {
-            font-family: 'Gochi Hand', cursive;
-        }
-
-        @keyframes floating {
-            0% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-10px);
-            }
-
-            100% {
-                transform: translateY(0px);
-            }
-        }
-
-        .floating {
-            animation: floating 4s infinite ease-in-out;
         }
 
         .no-scrollbar::-webkit-scrollbar {
@@ -128,7 +63,7 @@
     </style>
 </head>
 
-<body class="text-text-primary antialiased min-h-screen" :class="{ 'modal-open': cartOpen || itemModalOpen }" x-data="{ 
+<body class="antialiased min-h-screen" :class="{ 'modal-open': cartOpen || itemModalOpen }" x-data="{ 
         cartOpen: false, 
         itemModalOpen: false, 
         cartCount: Number({{ session('cart') ? array_sum(array_column(session('cart'), 'qty')) : 0 }}),
@@ -138,45 +73,43 @@
       }">
 
     <div class="page-bg">
-        <!-- Large blue circle — top right -->
-        <div class="candy-circle" style="width:420px; height:420px; top:-120px; right:-80px; background:rgba(66,122,181,0.10); border:6px solid rgba(66,122,181,0.08);"></div>
+        <!-- Watercolor blobs -->
+        <div class="watercolor-blob w-[500px] h-[500px] top-[-50px] left-[-150px] opacity-70"></div>
+        <div class="watercolor-blob w-[600px] h-[600px] top-[30%] right-[-200px] opacity-60 bg-[#b6ebd8]"></div>
+        <div class="watercolor-blob w-[450px] h-[450px] bottom-[10%] left-[10%] opacity-50 bg-[#dfbbe4]"></div>
 
-        <!-- Medium yellow square — bottom left -->
-        <div class="candy-square" style="width:300px; height:300px; bottom:-60px; left:-50px; background:rgba(247,221,125,0.18); border:6px solid rgba(247,221,125,0.12); --rot:12deg; animation: candy-bounce 6s ease-in-out infinite;"></div>
-
-        <!-- Small blue circle — middle left -->
-        <div class="candy-circle" style="width:180px; height:180px; top:35%; left:5%; background:rgba(66,122,181,0.08); border:4px solid rgba(66,122,181,0.06); --rot:-8deg; animation: candy-bounce 7s ease-in-out infinite; animation-delay:-2s;"></div>
-
-        <!-- Small yellow circle — center right -->
-        <div class="candy-circle" style="width:150px; height:150px; top:55%; right:10%; background:rgba(247,221,125,0.14); border:4px solid rgba(247,221,125,0.10); --rot:6deg; animation: candy-bounce 5s ease-in-out infinite; animation-delay:-1s;"></div>
-
-        <!-- Tiny blue square — top center -->
-        <div class="candy-square" style="width:100px; height:100px; top:12%; left:40%; background:rgba(66,122,181,0.06); border:3px solid rgba(66,122,181,0.05); --rot:-15deg; animation: candy-bounce 8s ease-in-out infinite; animation-delay:-3s;"></div>
-
-        <!-- Wavy bottom edge -->
-        <svg class="candy-wave" viewBox="0 0 2400 120" style="height:100px; opacity:0.06; fill:#427AB5;">
-            <path d="M0,60 C200,120 400,0 600,60 C800,120 1000,0 1200,60 C1400,120 1600,0 1800,60 C2000,120 2200,0 2400,60 L2400,120 L0,120 Z"></path>
-        </svg>
+        <!-- Decorative Doodles -->
+        <span class="doodle-accent text-[60px] top-32 left-10 transform -rotate-12">stylus_note</span>
+        <span class="doodle-accent text-[80px] top-64 right-20 transform rotate-45 opacity-40">gesture</span>
+        <span class="doodle-accent text-[50px] bottom-40 left-1/4 transform rotate-180 opacity-50">arrow_warm_up</span>
+        <span class="doodle-accent text-[70px] top-1/2 right-1/4 transform -rotate-45 opacity-30">draw</span>
     </div>
 
-    <!-- Dynamic Top Navigation (Shrinks on Desktop, Hides on Mobile) -->
-    <header
-        class="fixed top-0 left-0 z-50 transition-all duration-500 ease-in-out bg-white border-b-4 border-primary overflow-hidden shadow-sm"
-        :class="cartOpen ? (window.innerWidth < 1024 ? '-translate-y-full' : '') : 'translate-y-0'"
-        :style="cartOpen && window.innerWidth >= 1024 ? 'width: calc(100% - 28rem)' : 'width: 100%'">
-        <div class="flex justify-between items-center px-6 py-4">
-            <a href="{{ route('menu.index') }}"
-                class="text-2xl font-heading font-black tracking-tight text-primary uppercase italic whitespace-nowrap">
-                SweetBite 🧁
+    <!-- Artisanal Header -->
+    <header class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-3rem)] max-w-container-max px-6 py-4 bg-white/90 backdrop-blur-sm wobbly-border-thin shadow-sm transform transition-all duration-500"
+            :class="cartOpen ? '-translate-y-[150%] opacity-0' : '-rotate-1 translate-y-0 opacity-100'">
+        <div class="flex justify-between items-center mx-auto">
+            <a href="{{ route('menu.index', ['table' => session('table_number')]) }}"
+                class="hand-drawn font-black text-4xl text-[#8e4e14] italic transform -rotate-2 px-4 py-1 bg-white wobbly-border-thin shadow-[2px_2px_0_#8e4e14] flex items-center gap-2">
+                SweetBite <span class="material-symbols-outlined text-[32px]">cake</span>
             </a>
+            
+            <div class="flex items-center gap-4">
+                @if(session('table_number'))
+                    <div class="bg-[#f4a261] text-white wobbly-border-thin px-4 py-1 transform rotate-2 hidden md:block">
+                        <span class="text-xs font-black uppercase tracking-widest">Meja</span>
+                        <span class="font-heading font-black text-xl ml-1">{{ session('table_number') }}</span>
+                    </div>
+                @endif
+            </div>
         </div>
     </header>
 
-    <main class="pt-24 pb-32 min-h-screen main-unit">
+    <main class="pt-32 pb-32 min-h-screen relative z-10">
         @yield('content')
     </main>
 
-    <!-- Bottom Cart Bar (Hidden when item modal is open) -->
+    <!-- Artisanal Bottom Cart Bar -->
     <div x-cloak
         x-show="cartCount > 0 && !itemModalOpen && !window.location.pathname.includes('/checkout') && !window.location.pathname.includes('/payment')"
         x-transition:enter="translate-y-full transition ease-out duration-500"
@@ -185,22 +118,19 @@
         class="fixed bottom-0 left-0 right-0 z-50 p-6 flex justify-center pointer-events-none">
 
         <div @click="cartOpen = true"
-            class="w-full max-w-2xl bg-accent text-primary p-4 rounded-[2.5rem] shadow-[10px_10px_0px_0px_#427AB5] flex items-center justify-between cursor-pointer pointer-events-auto hover:scale-[1.02] active:scale-95 transition-all border-4 border-primary group">
-            <div class="flex items-center gap-4">
-                <div class="bg-white/50 p-3 rounded-2xl border-2 border-primary">
-                    <span class="material-symbols-outlined text-primary text-3xl font-black">shopping_basket</span>
+            class="w-full max-w-2xl bg-[#8e4e14] text-white p-5 wobbly-border-extreme shadow-[6px_6px_0px_0px_rgba(142,78,20,0.3)] flex items-center justify-between cursor-pointer pointer-events-auto hover:scale-[1.05] hover:rotate-1 active:scale-95 transition-all group">
+            <div class="flex items-center gap-5">
+                <div class="bg-white/20 p-3 wobbly-border-thin">
+                    <span class="material-symbols-outlined text-white text-3xl font-black">shopping_basket</span>
                 </div>
                 <div>
-                    <p class="text-[10px] font-black text-primary/60 uppercase tracking-widest leading-none mb-1">
-                        Pesanan Kamu ✨</p>
+                    <p class="hand-drawn text-lg text-white/80 leading-none mb-1">Daftar Jajan Kamu ✨</p>
                     <h4 class="font-heading font-black text-2xl">
-                        <span x-text="cartCount"></span> Item • <span
-                            x-text="'Rp ' + cartTotal.toLocaleString('id-ID')"></span>
+                        <span x-text="cartCount"></span> Item • <span x-text="'Rp ' + cartTotal.toLocaleString('id-ID')"></span>
                     </h4>
                 </div>
             </div>
-            <div
-                class="flex items-center justify-center w-14 h-14 bg-white border-4 border-primary rounded-2xl group-hover:bg-primary group-hover:text-white transition-all shadow-[4px_4px_0px_0px_rgba(66,122,181,0.2)]">
+            <div class="flex items-center justify-center w-14 h-14 bg-white text-[#8e4e14] wobbly-border-thin group-hover:rotate-12 transition-all shadow-[3px_3px_0px_0px_rgba(0,0,0,0.1)]">
                 <span class="material-symbols-outlined font-black">arrow_forward</span>
             </div>
         </div>

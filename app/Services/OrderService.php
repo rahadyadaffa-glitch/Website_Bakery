@@ -25,6 +25,16 @@ class OrderService
         $subtotal = $this->cartService->getTotal();
         
         return DB::transaction(function () use ($data, $cart, $subtotal) {
+            // Update table status
+            $table = \App\Models\Table::where('number', $data['table_number'])->first();
+            if ($table) {
+                // Opsional: Cek jika meja sudah terisi
+                // if ($table->status === 'occupied') {
+                //     throw new \Exception("Meja nomor {$table->number} sedang terisi.");
+                // }
+                $table->update(['status' => 'occupied']);
+            }
+
             $order = new Order();
             $order->order_number = $order->generateOrderNumber();
             $order->table_number = $data['table_number'];
