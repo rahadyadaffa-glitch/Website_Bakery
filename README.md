@@ -13,7 +13,7 @@
 
 **SweetBite** adalah aplikasi web pemesanan makanan dan minuman premium yang dirancang khusus untuk toko bakery, dessert shop, atau artisanal cafe. Dengan estetika yang hangat, organik, dan berkelas, SweetBite membawa pengalaman memesan kue dan roti ke level yang lebih modern dan efisien.
 
-Aplikasi ini memudahkan pelanggan untuk melakukan pemesanan secara mandiri (self-service) melalui QR Code, serta membantu operasional staf (waiter) dan admin dalam mengelola pesanan secara real-time.
+**Keunggulan Utama: Tanpa Kasir (Cashierless)**. Pelanggan dapat memesan dan mengelola pesanan mereka secara mandiri, mengurangi antrean di meja kasir dan mempercepat proses operasional.
 
 ---
 
@@ -35,6 +35,18 @@ Aplikasi ini memudahkan pelanggan untuk melakukan pemesanan secara mandiri (self
 - **Manajemen Menu Lengkap** — CRUD menu, kategori, status ketersediaan, dan manajemen foto produk.
 - **Analitik & Riwayat** — Laporan pesanan dengan filter tanggal yang fleksibel untuk memantau performa penjualan.
 - **QR Code Generator** — Generate QR Code unik untuk setiap meja langsung dari dashboard.
+
+---
+
+## 🔄 Alur Pesanan (Self-Service Workflow)
+
+Sistem ini dirancang untuk memangkas jalur pemesanan konvensional:
+
+1. **Scan QR Meja** — Pelanggan datang dan memindai QR Code yang ada di meja masing-masing menggunakan smartphone.
+2. **Pilih & Pesan** — Pelanggan melihat menu digital, memilih item, dan melakukan checkout langsung dari perangkat mereka.
+3. **Dapur & Admin** — Pesanan muncul secara otomatis di dashboard dapur secara real-time untuk segera diproses.
+4. **Validasi Waiter** — Waiter menerima notifikasi, menyiapkan item, dan mencetak struk persiapan.
+5. **Penyajian** — Makanan/minuman diantarkan ke meja pelanggan. Semua proses selesai tanpa pelanggan harus mengantre di kasir.
 
 ---
 
